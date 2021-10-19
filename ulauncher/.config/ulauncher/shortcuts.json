@@ -1,0 +1,22 @@
+{
+    "26deac61-d0bf-4604-adf4-611968105d3c": {
+        "id": "26deac61-d0bf-4604-adf4-611968105d3c",
+        "name": "GitHub",
+        "keyword": "gh",
+        "cmd": "https://github.com/search?q=%s",
+        "icon": "~/.config/ulauncher/icons/github.svg",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1634487650.2561507
+    },
+    "5be46509-409d-48ea-864c-ef891310b206": {
+        "id": "5be46509-409d-48ea-864c-ef891310b206",
+        "name": "ArchWiki",
+        "keyword": "aw",
+        "cmd": "https://wiki.archlinux.org/index.php?search=%s",
+        "icon": "~/.config/ulauncher/icons/archlinux.svg",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1634650767.0620844
+    }
+}

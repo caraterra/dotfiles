@@ -1,0 +1,26 @@
+#
+# .aliases
+# Written by Alexander Carter
+#
+# add `source ${HOME}/.aliases` to your shell rc
+
+## Git
+alias gs="git status"
+alias ga="git add"
+alias gaa="git add --all"
+alias gcm="git commit -m"
+alias gl="git log"
+alias gp="git pull"
+alias gpp="git push"
+## Basic Commands
+alias ..="cd .."
+alias la="ls -a --color=always"
+alias ll="ls -l --color=always"
+alias lla="ls -la --color=always"
+alias cp="cp -vr"
+alias mv="mv -v"
+alias rm="rm -v"
+alias mkdir="mkdir -pv"
+alias grep="grep -i --color=auto"
+## Programs
+alias ytdlm="youtube-dl -x --audio-format mp3 --embed-thumbnail"

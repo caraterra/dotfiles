@@ -1,0 +1,29 @@
+# indentation
+set-option global tabstop 4
+set-option global indentwidth 0
+
+# aesthetics
+set-face global comment bright-black,default+i
+set-face global Whitespace bright-black,default+i
+set-face global LineNumbers bright-black,default+i
+
+add-highlighter global/ number-lines
+# add-highlighter global/ show-whitespaces
+add-highlighter global/ show-matching
+
+# copy-paste with the system clipboard on X
+# hook global RegisterModified '"' %{ nop %sh{
+# 	printf %s "$kak_main_reg_dquote" | xclip -i -selection clipboard >&- 2>&-
+# }}
+
+# map global normal P '!xclip -o -selection "clipboard"<ret>'
+# map global normal p '<a-!>xclip -o -selection "clipboard"<ret>'
+
+# copy-paste with the system clipboard on Wayland
+hook global RegisterModified '"' %{ nop %sh{
+	printf %s "$kak_main_reg_dquote" | wl-copy -n >&- 2>&-
+}}
+
+map global normal P '!wl-paste <ret>'
+map global normal p '<a-!>wl-paste <ret>'
+
