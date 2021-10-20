@@ -6,24 +6,41 @@ set-option global indentwidth 0
 set-face global comment bright-black,default+i
 set-face global Whitespace bright-black,default+i
 set-face global LineNumbers bright-black,default+i
+set-face global WrapMarker bright-black,default
 
 add-highlighter global/ number-lines
-# add-highlighter global/ show-whitespaces
 add-highlighter global/ show-matching
+add-highlighter global/ wrap -marker '↪\'
 
-# copy-paste with the system clipboard on X
-# hook global RegisterModified '"' %{ nop %sh{
-# 	printf %s "$kak_main_reg_dquote" | xclip -i -selection clipboard >&- 2>&-
-# }}
+# copy-paste with the system clipboard 
+hook global RegisterModified '"' %{ nop %sh{
+ 	# printf %s "$kak_main_reg_dquote" | xclip -i -selection clipboard >&- 2>&-
+	printf %s "$kak_main_reg_dquote" | wl-copy -n > /dev/null 2>&1 &
+}}
 
 # map global normal P '!xclip -o -selection "clipboard"<ret>'
 # map global normal p '<a-!>xclip -o -selection "clipboard"<ret>'
-
-# copy-paste with the system clipboard on Wayland
-hook global RegisterModified '"' %{ nop %sh{
-	printf %s "$kak_main_reg_dquote" | wl-copy -n >&- 2>&-
-}}
-
 map global normal P '!wl-paste <ret>'
 map global normal p '<a-!>wl-paste <ret>'
 
+# file-specific options
+hook global WinSetOption filetype=c %{
+	set-option window lintcmd "cppcheck --language=c --enable=warning,style,performance,portablility,information --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+}
+
+hook global WinSetOption filetype=cpp %{
+	set-option window lintcmd "cppcheck --language=c++ --enable=warning,style,performance,portability,information --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+}
+
+hook global WinSetOption filetype=latex %{
+	add-highlighter buffer/ wrap -word -marker '↪\'
+}
+
+hook global WinSetOption filetype=markdown %{
+	set-option window lintcmd "proselint"
+	add-highlighter buffer/ wrap -word -marker '↪\'
+}
+
+hook global WinSetOption filetype=sh %{
+	set-option window lintcmd "shellcheck -fgcc -Cnever"
+}
