@@ -36,6 +36,6 @@ stow *
 - [Derek Taylor's playlist](https://youtube.com/playlist?list=PL5--8gKSku144jIsizdhdxq_fKTmBBGBA) on XMonad
 - [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) and [tmux-pain-control](https://github.com/tmux-plugins/tmux-pain-control)
 
-![Unilicense](https://img.shields.io/github/license/acarter0077/dotfiles?style=for-the-badge)
+![Unilicense](https://img.shields.io/github/license/caraterra/dotfiles?style=for-the-badge)
 
-![Commits](https://img.shields.io/github/commit-activity/m/acarter0077/dotfiles?style=for-the-badge)
+![Commits](https://img.shields.io/github/commit-activity/m/caraterra/dotfiles?style=for-the-badge)
