@@ -1,3 +1,9 @@
+# load plugins
+nop %sh{
+    mkdir -p "$kak_config/autoload"
+    ln -s "$kak_runtime/autoload" "$kak_config/autoload/standard-library"
+}
+
 # indentation
 set-option global tabstop 4
 set-option global indentwidth 0
@@ -12,35 +18,73 @@ add-highlighter global/ number-lines
 add-highlighter global/ show-matching
 add-highlighter global/ wrap -marker '↪\'
 
-# copy-paste with the system clipboard 
-hook global RegisterModified '"' %{ nop %sh{
- 	# printf %s "$kak_main_reg_dquote" | xclip -i -selection clipboard >&- 2>&-
-	printf %s "$kak_main_reg_dquote" | wl-copy -n > /dev/null 2>&1 &
-}}
+# indentation commands
+define-command -params 2 -docstring %{
+	indent-spaces <scope> <num>: set the indentation of the <scope> to be <num> spaces.
+} -shell-script-candidates %{
+	if [[ $kak_token_to_complete -eq 0 ]]; then
+		printf 'buffer\nglobal\nwindow'
+	fi
+} indent-spaces %{
+	set-option %arg{1} indentwidth %arg{2}
+	unset-option %arg{1} tabstop
+	map %arg{1} insert <tab> '<a-;><a-gt>'
+	map %arg{1} insert <s-tab> '<a-;><a-lt>'
+}
 
-# map global normal P '!xclip -o -selection "clipboard"<ret>'
-# map global normal p '<a-!>xclip -o -selection "clipboard"<ret>'
-map global normal P '!wl-paste <ret>'
-map global normal p '<a-!>wl-paste <ret>'
+define-command -params 2 -docstring %{
+	indent-tabs <num>: set the indentation of the <scope> to be tabs of size <num>.
+} -shell-script-candidates %{
+	if [[ $kak_token_to_complete -eq 0 ]]; then
+		printf 'buffer\nglobal\nwindow'
+	fi
+} indent-tabs %{
+	set-option %arg{1} indentwidth 0
+	set-option %arg{1} tabstop %arg{2}
+	unmap %arg{1} insert <tab> '<a-;><a-gt>'
+	unmap %arg{1} insert <s-tab> '<a-;><a-lt>'
+}
 
 # file-specific options
+# TODO: Add proper indentation styles for each filetype I use
 hook global WinSetOption filetype=c %{
 	set-option window lintcmd "cppcheck --language=c --enable=warning,style,performance,portablility,information --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+	indent-tabs window 4
 }
 
 hook global WinSetOption filetype=cpp %{
 	set-option window lintcmd "cppcheck --language=c++ --enable=warning,style,performance,portability,information --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+	indent-tabs window 4
+}
+
+hook global WinSetOption filetype=html %{
+	indent-spaces window 2
+}
+
+hook global WinSetOption filetype=css %{
+	indent-spaces window 2
+}
+
+hook global WinSetOption filetype=js %{
+	indent-spaces window 4
 }
 
 hook global WinSetOption filetype=latex %{
 	add-highlighter buffer/ wrap -word -marker '↪\'
+	indent-tabs window 4
 }
 
 hook global WinSetOption filetype=markdown %{
 	set-option window lintcmd "proselint"
 	add-highlighter buffer/ wrap -word -marker '↪\'
+	indent-spaces window 4
+}
+
+hook global WinSetOption filetype=python %{
+	indent-spacese window 4
 }
 
 hook global WinSetOption filetype=sh %{
 	set-option window lintcmd "shellcheck -fgcc -Cnever"
+	indent-tabs window 4
 }

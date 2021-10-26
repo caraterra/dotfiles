@@ -1,5 +1,5 @@
 #
-# .profile
+# .bash_profile
 # Written by Alexander J Carter
 #
 
