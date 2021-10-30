@@ -5,7 +5,7 @@ nop %sh{
 }
 
 # indentation
-set-option global tabstop 4
+set-option global tabstop 8
 set-option global indentwidth 0
 
 # aesthetics
@@ -18,73 +18,67 @@ add-highlighter global/ number-lines
 add-highlighter global/ show-matching
 add-highlighter global/ wrap -marker '↪\'
 
-# indentation commands
-define-command -params 2 -docstring %{
-	indent-spaces <scope> <num>: set the indentation of the <scope> to be <num> spaces.
-} -shell-script-candidates %{
-	if [[ $kak_token_to_complete -eq 0 ]]; then
-		printf 'buffer\nglobal\nwindow'
-	fi
-} indent-spaces %{
-	set-option %arg{1} indentwidth %arg{2}
-	unset-option %arg{1} tabstop
-	map %arg{1} insert <tab> '<a-;><a-gt>'
-	map %arg{1} insert <s-tab> '<a-;><a-lt>'
+define-command expandtab %{
+	map window insert <tab> '<a-;><a-gt>'
+	map window insert <s-tab> '<a-;><a-lt>'
+	set-option window indentwidth %opt{tabstop}
 }
 
-define-command -params 2 -docstring %{
-	indent-tabs <num>: set the indentation of the <scope> to be tabs of size <num>.
-} -shell-script-candidates %{
-	if [[ $kak_token_to_complete -eq 0 ]]; then
-		printf 'buffer\nglobal\nwindow'
-	fi
-} indent-tabs %{
-	set-option %arg{1} indentwidth 0
-	set-option %arg{1} tabstop %arg{2}
-	unmap %arg{1} insert <tab> '<a-;><a-gt>'
-	unmap %arg{1} insert <s-tab> '<a-;><a-lt>'
+define-command noexpandtab %{
+	unmap window insert <tab> '<a-;><a-gt>'
+	unmap window insert <s-tab> '<a-;><a-lt>'
+	set-option window indentwidth 0
 }
 
 # file-specific options
 # TODO: Add proper indentation styles for each filetype I use
 hook global WinSetOption filetype=c %{
-	set-option window lintcmd "cppcheck --language=c --enable=warning,style,performance,portablility,information --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
-	indent-tabs window 4
+	set-option window lintcmd "cppcheck --language=c --std=c99 --enable=all --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+	set-option window tabstop 8
+	noexpandtab
 }
 
 hook global WinSetOption filetype=cpp %{
-	set-option window lintcmd "cppcheck --language=c++ --enable=warning,style,performance,portability,information --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
-	indent-tabs window 4
+	set-option window lintcmd "cppcheck --language=c++ --std=c++11 --enable=all --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+	set-option window tabstop 8
+	noexpandtab
 }
 
 hook global WinSetOption filetype=html %{
-	indent-spaces window 2
+	set-option window tabstop 2
+	expandtab
 }
 
 hook global WinSetOption filetype=css %{
-	indent-spaces window 2
+	set-option window tabstop 2
+	expandtab
 }
 
 hook global WinSetOption filetype=js %{
-	indent-spaces window 4
+	set-option window tabstop 2
+	expandtab
 }
 
 hook global WinSetOption filetype=latex %{
 	add-highlighter buffer/ wrap -word -marker '↪\'
-	indent-tabs window 4
+	set-option window tabstop 4
+	noexpandtab
 }
 
 hook global WinSetOption filetype=markdown %{
 	set-option window lintcmd "proselint"
 	add-highlighter buffer/ wrap -word -marker '↪\'
-	indent-spaces window 4
+	set-option window tabstop 4
+	expandtab
 }
 
 hook global WinSetOption filetype=python %{
-	indent-spacese window 4
+	set-option window tabstop 4
+	expandtab
 }
 
 hook global WinSetOption filetype=sh %{
 	set-option window lintcmd "shellcheck -fgcc -Cnever"
-	indent-tabs window 4
+	set-option window tabstop 8
+	noexpandtab
 }
