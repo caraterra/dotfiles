@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # .aliases
 # Written by Alexander Carter
@@ -6,13 +7,13 @@
 
 ## Basic Commands
 alias ..="cd .."
-alias la="ls -a --color=always"
-alias ll="ls -l --color=always"
-alias lla="ls -la --color=always"
-alias cp="cp -vr"
+alias la="ls -a"
+alias ll="ls -lh"
+alias lla="ls -lha"
+alias cp="cp -v"
 alias mv="mv -v"
 alias rm="rm -v"
-alias mkdir="mkdir -pv"
+alias mkdir="mkdir -v"
 alias grep="grep -i --color=auto"
 ## Programs
 alias ytdlm="youtube-dl -x --audio-format mp3 --embed-thumbnail"

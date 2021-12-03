@@ -1,9 +1,11 @@
+#!/bin/bash
 #
 # .bashrc
 # Written by Alexander J Carter
 #
 
-source ~/.aliases
+alias_dir=${HOME}/.alises
+[ -f "${alias_dir}" ] && . "${alias_dir}"
 
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
 
@@ -15,16 +17,14 @@ __prompt_command() {
 
 	local bright_black='\[\e[0;90m\]'
 	local red='\[\e[0;31m\]'
-	local yellow='\[\e[0;33m\]'
-	local green='\[\e[0;32m\]'
 
-	PS1=""
+	PS1="\u${bright_black}@\h${reset} "
 
 	PS1+="\W "
 
 	# Git branch
 	is_in_git_dir=$(git rev-parse --is-inside-work-tree 2> /dev/null)
-	if [ $is_in_git_dir ]; then
+	if [ "$is_in_git_dir" ]; then
 		git_branch=$(git symbolic-ref --short HEAD)
 		PS1+="${bold} ${git_branch}${reset} "
 	fi
