@@ -5,7 +5,11 @@ snippet def "#define ..."
 endsnippet
 
 snippet inc "#include ..."
-#include $1
+#include "$1"
+endsnippet
+
+snippet incl "#include <...>"
+#include <$1>
 endsnippet
 
 snippet ifndef "#ifndef ... #define ... #endif"
@@ -34,6 +38,10 @@ snippet note "NOTE comment" w
 // NOTE: $1 (${2:`git config user.name | awk '{print $1}' || echo $USER`} ~ `date +"%Y-%m-%d %H:%M"`)$0
 endsnippet
 
+snippet todo "HACK comment" w
+// HACK: $1 (${2:`git config user.name | awk '{print $1}' || echo $USER`} ~ `date +"%Y-%m-%d %H:%M"`)$0
+endsnippet
+
 snippet fileh "file header comment" b
 /*
 File:             `!v expand('%:t')`
@@ -44,29 +52,28 @@ Description:      ${4:${VISUAL}}
 ${0}
 endsnippet
 
-snippet funh "function header comment" b
-/*
-Function: $1
-Description: $2
-
-Params: $3
-Returns: $4
-Error: $5
-*/
-endsnippet
-
 snippet fund "function definition" b
 ${1:void} ${2:function_name}($3);${0}
 endsnippet
 
 snippet fun "function" b
-${1:void} ${2:function_name}($3) {
+${1:void} ${2:function_name}($3)
+{
 	${VISUAL}$0
 }
 endsnippet
 
+snippet mn "main() function"
+int main(void)
+{
+	$0
+	return 0;
+}
+endsnippet
+
 snippet main "main() function with arguments"
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 	$0
 	return 0;
 }

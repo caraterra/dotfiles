@@ -30,3 +30,6 @@ source /home/alex/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh-completions
 fpath=(/home/alex/.zsh/zsh-completions/src $fpath)
+
+# fzf keybindings
+source /usr/share/fzf/shell/key-bindings.zsh

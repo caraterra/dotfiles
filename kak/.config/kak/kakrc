@@ -32,33 +32,24 @@ hook global BufWritePre .* %{ evaluate-commands %sh{
 	[ -n "$kak_opt_formatcmd" ] && printf "format\n"
 }}
 
+
 # file-specific options
-# TODO: Add proper indentation styles for each filetype I use
-hook global WinSetOption filetype=c %{
- 	set-option window lintcmd "cppcheck --language=c --std=c89 --std=posix --enable=all --platform=unix64 --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
+# c/c++
+hook global WinSetOption filetype=(c|cpp) %{
 	set-option buffer formatcmd 'astyle -A3 -t -p -H -U -k3 -xC80'
+ 	set-option window lintcmd "cppcheck --std=posix --enable=all --platform=unix64 --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
 	set-option window tabstop 8
 	noexpandtab
 }
 
-hook global WinSetOption filetype=cpp %{
-	set-option window lintcmd "cppcheck --language=c++ --std=c++11 --std=posix --enable=all --platform=unix64 --template='{file}:{line}:{column}: {severity}: {message}' 2>&1"
-	set-option buffer formatcmd 'astyle -A3 -t -p -H -U -k3 -xC80'
-	set-option window tabstop 8
-	noexpandtab
-}
-
-hook global WinSetOption filetype=html %{
-	set-option window indentwidth 2
-	expandtab
-}
-
-hook global WinSetOption filetype=css %{
+hook global WinSetOption filetype=(html|css) %{
 	set-option window indentwidth 2
 	expandtab
 }
 
 hook global WinSetOption filetype=js %{
+	set-option window lintcmd 'run() { cat "$1" | npx eslint -f unix --stdin --stdin-filename "$kak_buffile";} && run'
+	set-option window formatcmd 'standard --fix'
 	set-option window indentwidth 2
 	expandtab
 }
@@ -90,7 +81,12 @@ hook global WinSetOption filetype=sh %{
 	noexpandtab
 }
 
-hook global WinSetOption filetype=yaml %{
+hook global WinSetOption filetype=json %{
+	set-option window indentwidth 2
+	set-option buffer formatcmd "jq ."
+}
+
+hook global WinSetOption filetype=(yaml|toml) %{
 	set-option window indentwidth 2
 	expandtab
 }

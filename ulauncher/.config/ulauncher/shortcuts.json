@@ -18,5 +18,25 @@
         "is_default_search": false,
         "run_without_argument": false,
         "added": 1634650767.0620844
+    },
+    "a2f7b101-c1dc-4182-9ba7-325b99b3144a": {
+        "id": "a2f7b101-c1dc-4182-9ba7-325b99b3144a",
+        "name": "Gentoo Wiki",
+        "keyword": "gw",
+        "cmd": "https://wiki.gentoo.org/index.php?search=%s",
+        "icon": "~/.config/ulauncher/icons/gentoo.svg",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1637548325.5711167
+    },
+    "9b0abf94-ad3b-40f0-b603-a1eaaf7812e6": {
+        "id": "9b0abf94-ad3b-40f0-b603-a1eaaf7812e6",
+        "name": "Wikipedia",
+        "keyword": "wp",
+        "cmd": "https://en.wikipedia.org/wiki/%s",
+        "icon": "~/.config/ulauncher/icons/wikipedia.svg",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1638685429.422766
     }
 }
