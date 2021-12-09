@@ -17,9 +17,6 @@ cd ~/.dotfiles
 
 # To install a specfic program's configuration files
 stow <name of program>
-
-# To install all configuration files
-stow .
 ```
     
 ## Programs Configured
