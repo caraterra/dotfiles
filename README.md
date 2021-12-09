@@ -19,7 +19,7 @@ cd ~/.dotfiles
 stow <name of program>
 
 # To install all configuration files
-stow *
+stow .
 ```
     
 ## Programs Configured
