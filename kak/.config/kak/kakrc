@@ -7,7 +7,6 @@ nop %sh{
 # indentation
 set-option global tabstop 8
 set-option global indentwidth 0
-# smarttab
 
 # aesthetics
 set-face global comment bright-black,default+i
@@ -31,7 +30,6 @@ hook global BufWritePre .* %{ evaluate-commands %sh{
 	[ -n "$kak_opt_lintcmd" ] && printf "lint\n"
 	[ -n "$kak_opt_formatcmd" ] && printf "format\n"
 }}
-
 
 # file-specific options
 # c/c++
