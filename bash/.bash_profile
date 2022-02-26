@@ -1,4 +1,4 @@
-#
+#!/bin/bash
 # .bash_profile
 # Written by Alexander J Carter
 #
@@ -17,7 +17,7 @@ export HISTCONTROL=ignoredups:erasedups           # no duplicate entries
 PATH=${HOME}/.local/bin:$PATH
 
 scripts_path=${HOME}/.scripts
-if [ -d $scripts_path ]; then
+if [ -d "$scripts_path" ]; then
 	PATH=$scripts_path:$PATH
 fi
 
@@ -33,6 +33,6 @@ shopt -s checkwinsize # checks term size when bash regains control
 
 # bash
 
-if [ -f ${HOME}/.bashrc ]; then
-	source ${HOME}/.bashrc
+if [ -f "${HOME}/.bashrc" ]; then
+	source "${HOME}/.bashrc"
 fi
