@@ -26,10 +26,7 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # zsh-autosuggestions
-source /home/alex/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/alex/.local/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh-completions
-fpath=(/home/alex/.zsh/zsh-completions/src $fpath)
-
-# fzf keybindings
-source /usr/share/fzf/shell/key-bindings.zsh
+fpath=(/home/alex/.local/share/zsh/zsh-completions/src $fpath)
