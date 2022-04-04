@@ -29,6 +29,7 @@ stow <name of program>
 - [tmux](https://github.com/tmux/tmux)
 - [ulauncher](https://github.com/Ulauncher/Ulauncher/)
 - [xmonad](https://github.com/xmonad/xmonad)
+- [zsh](https://zsh.sourceforge.io/)
 
 ## Acknowledgements
 
