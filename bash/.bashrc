@@ -1,16 +1,13 @@
 #!/bin/bash
-#
 # .bashrc
-# Written by Alexander J Carter
-#
 
-alias_dir=${HOME}/.aliases
-[ -f "${alias_dir}" ] && . "${alias_dir}"
+alias_file=${HOME}/.aliases
+[ -f "${alias_file}" ] && . "${alias_file}"
 
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
 
 __prompt_command() {
-	local EXIT="$?"    # This needs to be first
+	local EXIT="$?" # This needs to be first
 
 	local reset='\[\e[0m\]'
 	local bold='\[\e[1m\]'
@@ -34,5 +31,4 @@ __prompt_command() {
 		PS1+="${red}(${EXIT}) "
 	fi
 	PS1+="\$${reset} "
-
 }

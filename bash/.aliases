@@ -1,9 +1,5 @@
 #!/bin/sh
-#
 # .aliases
-# Written by Alexander Carter
-#
-# add `source ${HOME}/.aliases` to your shell rc
 
 ## Basic Commands
 alias ..="cd .."
@@ -14,8 +10,6 @@ alias cp="cp -v"
 alias mv="mv -v"
 alias rm="rm -v"
 alias mkdir="mkdir -v"
-alias grep="grep -i --color=auto"
+alias grep="grep --color=auto"
 ## Programs
-alias transmission-remote='transmission-remote $(sed -n '"'1p'"' ~/.config/torrent-remote.txt) -n $(sed -n '"'2p'"' ~/.config/torrent-remote.txt)'
-
 alias ytdlm="youtube-dl -x --audio-format mp3 --embed-thumbnail"
