@@ -26,7 +26,7 @@ __prompt_command() {
 	is_in_git_dir=$(git rev-parse --is-inside-work-tree 2> /dev/null)
 	if [ "$is_in_git_dir" ]; then
 		git_branch=$(git symbolic-ref --short HEAD)
-		PS1+="${bold} ${git_branch}${reset} "
+		PS1+="${bold}${git_branch}${reset} "
 	fi
 
 	# Escape code in $
