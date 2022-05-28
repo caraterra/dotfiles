@@ -4,7 +4,7 @@
 # Written by Alexander J Carter
 #
 
-alias_dir=${HOME}/.alises
+alias_dir=${HOME}/.aliases
 [ -f "${alias_dir}" ] && . "${alias_dir}"
 
 PROMPT_COMMAND=__prompt_command # Func to gen PS1 after CMDs
