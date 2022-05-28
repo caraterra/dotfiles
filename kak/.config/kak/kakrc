@@ -40,6 +40,12 @@ hook global WinSetOption filetype=(c|cpp) %{
 	noexpandtab
 }
 
+hook global WinSetOption filetype=(rust) %{
+	set-option buffer formatcmd 'rustfmt'
+	set-option window tabstop 4
+	expandtab
+}
+
 hook global WinSetOption filetype=(html|css) %{
 	set-option window indentwidth 2
 	expandtab
