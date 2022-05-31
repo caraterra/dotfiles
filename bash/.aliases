@@ -1,6 +1,8 @@
 #!/bin/sh
 # .aliases
 
+unalias -a
+
 ## Basic Commands
 alias ..="cd .."
 alias la="ls -a"
